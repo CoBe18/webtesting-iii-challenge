@@ -1,37 +1,20 @@
 import React from 'react';
 
-import Display from '../display/Display';
-import Controls from '../controls/Controls';
+const Display = ({ closed, locked }) => {
+  const closedClass = `led ${closed ? 'red-led' : 'green-led'}`;
+  const lockedClass = `led ${locked ? 'red-led' : 'green-led'}`;
 
-class Dashboard extends React.Component {
-  state = {
-    locked: false,
-    closed: false,
-  };
+  return (
+    <div className="display panel" data-testid="display">
+      <div className={lockedClass}>{locked ? 'Locked' : 'Unlocked'}</div>
+      <div className={closedClass}>{closed ? 'Closed' : 'Open'}</div>
+    </div>
+  );
+};
 
-  render() {
-    const { closed, locked } = this.state;
+Display.defaultProps = {
+  closed: false,
+  locked: false,
+};
 
-    return (
-      <>
-        <Display locked={locked} closed={closed} />
-        <Controls
-          locked={locked}
-          closed={closed}
-          toggleLocked={this.toggleLocked}
-          toggleClosed={this.toggleClosed}
-        />
-      </>
-    );
-  }
-
-  toggleLocked = () => {
-    this.setState(prev => ({ locked: !prev.locked }));
-  };
-
-  toggleClosed = () => {
-    this.setState(prev => ({ closed: !prev.closed }));
-  };
-}
-
-export default Dashboard;
+export default Display;
