@@ -1,14 +1,9 @@
 // Test away!
+import React from 'react'
+import {render, fireEvent} from '@testing-library/react'
+import Controls from './Controls'
 
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-
-import Controls from './Controls';
-
-
-test('open and unlocked, cant be open if its locked', () => {
-    const { getByTestId } = render (<Controls />);
-    const button = getByTestId(/toggle-btn/i);
-    fireEvent.click(button);
-    getByTestId()
+test('Gate are defaults at unlock and open', ()=> {
+    const {getByText} = render(<Controls locked closed/>)
+    getByText('Unlock Gate' && 'Open Gate')
 })
